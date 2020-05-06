@@ -1,7 +1,7 @@
 #include <LiquidCrystal.h>
 LiquidCrystal lcd(13, 12, 11, 10, 9, 8);
 int dly = 250, b1Pin = 7, b1St = 0, b2Pin = 6, b2St = 0, b3Pin = 5, b3St = 0,  b4Pin = 4, b4St = 0;
-String line1 = "This will act as", line2 = "a keyboard", b1S = "All I want 4 my", b2S = "BD is a ", b3S = "REDACTED", b4S = "REDACTED", b234S = "Hello World";
+String line1 = "This will act as", line2 = "a keyboard", b1S = "Oops ", b2S = "I did ", b3S = "it ", b4S = "again ", b234S = "I played..";
 void setup() {
   // put your setup code here, to run once:
   lcd.begin(16, 2);
