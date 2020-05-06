@@ -1,7 +1,7 @@
 #include <LiquidCrystal.h>
 LiquidCrystal lcd(13, 12, 11, 10, 9, 8);
 int dly = 250, b1Pin = 7, b1St = 0, b2Pin = 6, b2St = 0, b3Pin = 5, b3St = 0,  b4Pin = 4, b4St = 0;
-String line1 = "This will act as", line2 = "a keyboard", b1S = "1", b2S = "2", b3S = "3", b4S = "4";
+String line1 = "This will act as", line2 = "a keyboard", b1S = "1", b2S = "2", b3S = "3", b4S = "4", b234S = "Hello World";
 void setup() {
   // put your setup code here, to run once:
   lcd.begin(16, 2);
@@ -42,17 +42,23 @@ void loop() {
     lcd.print(b4S);
     delay(dly);
   }
-  if(b3St==HIGH && b4St==HIGH){
+  if (b3St == HIGH && b4St == HIGH) {
     Serial.println("Button 3 and 4 pressed");
     lcd.clear();
     delay(dly);
   }
-  if(b2St==HIGH && b3St==HIGH){
-    Serial.println("Button 2 and 3 pressed");
-    lcd.setCursor(0,1);
+  if (b2St == HIGH && b3St == HIGH) {
+    Serial.println("Buttons 2 and 3 pressed");
+    lcd.setCursor(0, 1);
     delay(dly);
   }
 
-  
-  
+  if (b2St == HIGH && b3St == HIGH && b4St == HIGH) {
+    Serial.println("Buttons 2, 3, and 4 pressed");
+    lcd.print(b234S);
+    delay(dly);
+  }
+
+
+
 }
