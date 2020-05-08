@@ -23,16 +23,19 @@ void loop() {
   b4St = digitalRead(b4Pin);
   b5St = digitalRead(b5Pin);
   b6St = digitalRead(b6Pin);
-  //  for (int i = 0; i < noteLen; i++) {
-  //    tone(piezPin, notes[i]);
-  //    delay(dly);
-  //  }
 
   if (b0St == HIGH) {
     tone(piezPin, notes[0]);
-    Serial.println(b0S);    
+    Serial.println(b0S);
     delay(dly);
   }
+
+  else if (b1St == HIGH) {
+    tone(piezPin, notes[1]);
+    Serial.println(b1S);
+    delay(dly);
+  }
+  
   else {
     noTone(piezPin);
   }
