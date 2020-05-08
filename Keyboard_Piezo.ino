@@ -52,7 +52,19 @@ void loop() {
     Serial.println(b4S);
     delay(dly);
   }
-  
+
+  else if (b5St == HIGH) {
+    tone(piezPin, notes[5]);
+    Serial.println(b5S);
+    delay(dly);
+  }
+
+  else if (b6St == HIGH) {
+    tone(piezPin, notes[6]);
+    Serial.println(b6S);
+    delay(dly);
+  }
+    
   else {
     noTone(piezPin);
   }
