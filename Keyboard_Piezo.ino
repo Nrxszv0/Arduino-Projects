@@ -30,15 +30,10 @@ void loop() {
 
   if (b0St == HIGH) {
     tone(piezPin, notes[0]);
-    Serial.print(b0S);    
-    
+    Serial.println(b0S);    
+    delay(dly);
   }
   else {
     noTone(piezPin);
   }
-
-
-
-
-
 }
