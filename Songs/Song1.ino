@@ -1,3 +1,4 @@
+#include <Pitches.h>
 int piezPin = 13, noteLen = 10, dly = 100, bpm = 60;
 float wholeNt = 4 * (60 / bpm);
 float halfNt = 2 * (60 / bpm);
