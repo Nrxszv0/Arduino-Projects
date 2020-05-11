@@ -12,9 +12,6 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  digitalWrite(rLed, LOW);
-  digitalWrite(yLed, LOW);
-  digitalWrite(gLed, LOW);
   Serial.println(msg);
   while (Serial.available() == 0) {
 
@@ -22,6 +19,8 @@ void loop() {
   myLed = Serial.readString();
   if (myLed == r) {
     digitalWrite(rLed, HIGH);
+    digitalWrite(yLed, LOW);
+    digitalWrite(gLed, LOW);
     delay(dly);
     Serial.print(myLed);
     Serial.println(msg2);
@@ -30,6 +29,9 @@ void loop() {
   }
   else if (myLed == y) {
     digitalWrite(yLed, HIGH);
+    digitalWrite(rLed, LOW);
+    digitalWrite(gLed, LOW);
+
     delay(dly);
     Serial.print(myLed);
     Serial.println(msg2);
@@ -39,6 +41,8 @@ void loop() {
 
   else if (myLed == g) {
     digitalWrite(gLed, HIGH);
+    digitalWrite(yLed, LOW);
+    digitalWrite(rLed, LOW);
     delay(dly);
     Serial.print(myLed);
     Serial.println(msg2);
