@@ -1,4 +1,5 @@
-int rLed = 13, yLed = 12, gLed = 11, dly = 1000;
+int rLed = 13, yLed = 12, gLed = 11;
+//int dly = 2000;
 String myLed, msg = "What LED do you want to light? Red, Yellow, or Green? ", msg2 = " is lit.", msg3 = "Pretty Cool", msg4 = "Error: Name is invalid", r = "Red", y = "Yellow", g = "Green";
 
 void setup() {
@@ -21,7 +22,7 @@ void loop() {
     digitalWrite(rLed, HIGH);
     digitalWrite(yLed, LOW);
     digitalWrite(gLed, LOW);
-    delay(dly);
+//    delay(dly);
     Serial.print(myLed);
     Serial.println(msg2);
     Serial.println(msg3);
@@ -32,7 +33,7 @@ void loop() {
     digitalWrite(rLed, LOW);
     digitalWrite(gLed, LOW);
 
-    delay(dly);
+//    delay(dly);
     Serial.print(myLed);
     Serial.println(msg2);
     Serial.println(msg3);
@@ -43,7 +44,7 @@ void loop() {
     digitalWrite(gLed, HIGH);
     digitalWrite(yLed, LOW);
     digitalWrite(rLed, LOW);
-    delay(dly);
+//    delay(dly);
     Serial.print(myLed);
     Serial.println(msg2);
     Serial.println(msg3);
