@@ -1,5 +1,5 @@
 int rPin = 11, bPin = 12, gPin = 13;
-String myCol, msg = "What color do you want? ", r = "red", g = "green", b = "blue", o = "off";
+String myCol, msg = "What color do you want? ", r = "red", g = "green", b = "blue", o = "off", aq="aqua";
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
@@ -36,6 +36,11 @@ void loop() {
     digitalWrite(rPin, LOW);
     digitalWrite(gPin, LOW);
     digitalWrite(bPin, LOW);
+  }
+  if (myCol == aq) {
+    digitalWrite(rPin, LOW);
+    analogWrite(gPin, 255);
+    analogWrite(bPin, 255);
   }
 
 }
