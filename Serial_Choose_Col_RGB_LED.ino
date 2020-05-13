@@ -52,6 +52,11 @@ void loop() {
     analogWrite(gPin, 165);
     analogWrite(bPin, 0);
   }
+  if (myCol == pu) {
+    analogWrite(rPin, 128);
+    analogWrite(gPin, 0);
+    analogWrite(bPin, 128);
+  }
   
 
 }
