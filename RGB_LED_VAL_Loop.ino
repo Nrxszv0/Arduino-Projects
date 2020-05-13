@@ -10,15 +10,12 @@ void setup() {
 }
 
 void loop() {
-//  analogWrite(rPin, 255);
-//  analogWrite(gPin, 255);
-//  analogWrite(bPin, 255);
-  rVal=255;
-  bVal=0; 
-  for(gVal=0; gVal<=255; gVal++) {
+  rVal = 255;
+  bVal = 0;
+  for (gVal = 0; gVal <= 255; gVal++) {
     analogWrite(rPin, rVal);
     analogWrite(gPin, gVal);
-    analogWrite(bPin, bVal); 
+    analogWrite(bPin, bVal);
     Serial.print(r);
     Serial.print(rVal);
     Serial.print(g);
@@ -28,12 +25,12 @@ void loop() {
     delay(dly);
   }
 
-  gVal=255;
-  bVal=0; 
-  for(rVal=255; rVal>=0; rVal--) {
+  gVal = 255;
+  bVal = 0;
+  for (rVal = 255; rVal >= 0; rVal--) {
     analogWrite(rPin, rVal);
     analogWrite(gPin, gVal);
-    analogWrite(bPin, bVal); 
+    analogWrite(bPin, bVal);
     Serial.print(r);
     Serial.print(rVal);
     Serial.print(g);
@@ -43,26 +40,12 @@ void loop() {
     delay(dly);
   }
 
-  gVal=255;
-  rVal=0; 
-  for(bVal=0; bVal<=255; bVal++) {
+  gVal = 255;
+  rVal = 0;
+  for (bVal = 0; bVal <= 255; bVal++) {
     analogWrite(rPin, rVal);
     analogWrite(gPin, gVal);
-    analogWrite(bPin, bVal); 
-    Serial.print(r);
-    Serial.print(rVal);
-    Serial.print(g);
-    Serial.print(gVal);
-    Serial.print(b);
-    Serial.println(bVal);
-    delay(dly);
-  }
-  bVal=255;
-  rVal=0; 
-  for(gVal=255; gVal>=0; gVal--) {
-    analogWrite(rPin, rVal);
-    analogWrite(gPin, gVal);
-    analogWrite(bPin, bVal); 
+    analogWrite(bPin, bVal);
     Serial.print(r);
     Serial.print(rVal);
     Serial.print(g);
@@ -72,7 +55,48 @@ void loop() {
     delay(dly);
   }
 
-  
+  bVal = 255;
+  rVal = 0;
+  for (gVal = 255; gVal >= 0; gVal--) {
+    analogWrite(rPin, rVal);
+    analogWrite(gPin, gVal);
+    analogWrite(bPin, bVal);
+    Serial.print(r);
+    Serial.print(rVal);
+    Serial.print(g);
+    Serial.print(gVal);
+    Serial.print(b);
+    Serial.println(bVal);
+    delay(dly);
+  }
 
+  bVal = 255;
+  gVal = 0;
+  for (rVal = 0; rVal <= 255; rVal++) {
+    analogWrite(rPin, rVal);
+    analogWrite(gPin, gVal);
+    analogWrite(bPin, bVal);
+    Serial.print(r);
+    Serial.print(rVal);
+    Serial.print(g);
+    Serial.print(gVal);
+    Serial.print(b);
+    Serial.println(bVal);
+    delay(dly);
+  }
 
+  rVal = 255;
+  gVal = 0;
+  for (bVal = 255; bVal >= 0; bVal--) {
+    analogWrite(rPin, rVal);
+    analogWrite(gPin, gVal);
+    analogWrite(bPin, bVal);
+    Serial.print(r);
+    Serial.print(rVal);
+    Serial.print(g);
+    Serial.print(gVal);
+    Serial.print(b);
+    Serial.println(bVal);
+    delay(dly);
+  }
 }
