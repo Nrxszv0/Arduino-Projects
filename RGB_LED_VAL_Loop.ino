@@ -43,5 +43,36 @@ void loop() {
     delay(dly);
   }
 
+  gVal=255;
+  rVal=0; 
+  for(bVal=0; bVal<=255; bVal++) {
+    analogWrite(rPin, rVal);
+    analogWrite(gPin, gVal);
+    analogWrite(bPin, bVal); 
+    Serial.print(r);
+    Serial.print(rVal);
+    Serial.print(g);
+    Serial.print(gVal);
+    Serial.print(b);
+    Serial.println(bVal);
+    delay(dly);
+  }
+  bVal=255;
+  rVal=0; 
+  for(gVal=255; gVal>=0; gVal--) {
+    analogWrite(rPin, rVal);
+    analogWrite(gPin, gVal);
+    analogWrite(bPin, bVal); 
+    Serial.print(r);
+    Serial.print(rVal);
+    Serial.print(g);
+    Serial.print(gVal);
+    Serial.print(b);
+    Serial.println(bVal);
+    delay(dly);
+  }
+
+  
+
 
 }
