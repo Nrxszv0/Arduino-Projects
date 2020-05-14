@@ -1,4 +1,4 @@
-int rPin = 11, bPin = 12, gPin = 13;
+int rPin = 9, bPin = 10, gPin = 11, rVal = 110, bVal = 252, gVal = 106;
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
@@ -10,7 +10,7 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  digitalWrite(rPin,HIGH);
-  digitalWrite(bPin,HIGH);
-  digitalWrite(gPin,HIGH);
+  analogWrite(rPin, rVal);
+  analogWrite(gPin, gVal);
+  analogWrite(bPin, bVal);
 }
