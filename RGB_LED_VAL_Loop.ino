@@ -1,4 +1,4 @@
-int rPin = 11, bPin = 12, gPin = 13, rVal, gVal, bVal, dly = 1;
+int rPin = 9, bPin = 10, gPin = 11, rVal, gVal, bVal, dly = 1;
 String   r = "Red: ", g = ", Green: ", b = ", Blue: ";
 void setup() {
   // put your setup code here, to run once:
