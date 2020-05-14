@@ -1,5 +1,5 @@
-int rPin = 11, bPin = 12, gPin = 13;
-String myCol, msg = "What color do you want? ", r = "red", g = "green", b = "blue", o = "off", aq="aqua", ye="yellow", oa="orange";
+int rPin = 9, bPin = 10, gPin = 11;
+String myCol, msg = "What color do you want? ", r = "red", g = "green", b = "blue", o = "off", aq="aqua", ye="yellow", oa="orange", pu="purple";
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
