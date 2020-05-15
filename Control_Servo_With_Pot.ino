@@ -1,7 +1,7 @@
 #include <Servo.h>
 int serPin = 13, serAng, potPin=A0, potVal, dly=10;
 Servo ser;
-String msgPV="Potentiometer Value: ", msgSA=", Servo Angle: ",
+String msgPV="Potentiometer Value: ", msgSA=", Servo Angle: ";
 void setup() {
   // put your setup code here, to run once:
 Serial.begin(9600);
