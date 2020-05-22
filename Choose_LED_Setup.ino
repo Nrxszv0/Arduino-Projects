@@ -27,6 +27,17 @@ void loop() {
   else if(ans =="green") {
     digitalWrite(gLED, HIGH);
   }
+  else if(ans =="none") {
+    digitalWrite(rLED, LOW);
+    digitalWrite(yLED, LOW);
+    digitalWrite(gLED, LOW);
+  }
  
-
+  if(Serial.available() != 0) {
+    Serial.println(msg);
+  while(Serial.available() == 0) {
+    
+  }
+  ans=Serial.readString();
+  }
 }
