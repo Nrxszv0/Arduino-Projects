@@ -3,9 +3,9 @@ String msg="Do you want to turn on the Red, Yellow, or Green LED?", ans;
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
-  pinMode(rLED, HIGH);
-  pinMode(yLED, HIGH);
-  pinMode(gLED, HIGH);
+  pinMode(rLED, OUTPUT);
+  pinMode(yLED, OUTPUT);
+  pinMode(gLED, OUTPUT);
   Serial.println(msg);
   while(Serial.available() == 0) {
     
@@ -15,16 +15,18 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  if(ans =="red") {
+  Serial.println(ans);
+  if(ans == "red") {
     digitalWrite(rLED, HIGH);
   }
   
-  if(ans =="yellow") {
+  else if(ans =="yellow") {
     digitalWrite(yLED, HIGH);
   }
 
-  if(ans =="green") {
+  else if(ans =="green") {
     digitalWrite(gLED, HIGH);
   }
+ 
 
 }
