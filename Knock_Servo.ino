@@ -1,8 +1,8 @@
 #include <Servo.h>
 Servo kServo;
-int servoPin = 10, rLED = 11, yLED = 12, gLED = 13, btnPin = 2, btnVal, piezoPin = A0, knockVal, quietKnock = 150, loudKnock = 300, knockNum = 0, minKnockVal=125, totalGoodKnocks=3;
+int servoPin = 10, rLED = 11, yLED = 12, gLED = 13, btnPin = 2, btnVal, piezoPin = A0, knockVal, quietKnock = 150, loudKnock = 300, knockNum = 0, minKnockVal=125, totalGoodKnocks=3, unlockedSerVal=0, lockedSerVal=90;
 boolean isLocked = false;
-String unlockedMsg = "The box is unlocked", lockedMsg = "The box is locked";
+String unlockedMsg = "The box is unlocked", lockedMsg = "The box is locked", knocksLeftMsg= " more knocks left";
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
@@ -11,8 +11,8 @@ void setup() {
   pinMode(gLED, OUTPUT);
   pinMode(btnPin, INPUT);
   digitalWrite(gLED, HIGH);
-  kServo.attach(10);
-  kServo.write(0); // change to var
+  kServo.attach(servoPin);
+  kServo.write(unlockedSerVal); // change to var
   Serial.println(unlockedMsg);
 }
 
@@ -24,7 +24,7 @@ void loop() {
       isLocked = true;
       digitalWrite(gLED, LOW);
       digitalWrite(rLED, HIGH);
-      kServo.write(90); //change to var
+      kServo.write(lockedSerVal); //change to var
       Serial.println(lockedMsg);
       delay(1000); //change to var
 
@@ -37,11 +37,11 @@ void loop() {
         knockNum++;
       }
       Serial.print(totalGoodKnocks - knockNum); // change 3 to var
-      Serial.println(" more knocks left"); //change to var
+      Serial.println(knocksLeftMsg); //change to var
     }
     if (knockNum >= totalGoodKnocks) {
       isLocked = false;
-      kServo.write(0); // change to var
+      kServo.write(unlockedSerVal); // change to var
       digitalWrite(gLED, HIGH);
       digitalWrite(rLED, LOW);
       Serial.println(unlockedMsg);
@@ -59,7 +59,7 @@ boolean checkForKnock(int value) {
     return true;
   }
   else {
-    Serial.print("Bad knock value: ");
+    Serial.print("Bad knock value: ");//change to var
     Serial.println(value);
     return false;
   }
