@@ -1,6 +1,6 @@
 #include <Servo.h>
 Servo kServo;
-int servoPin = 10, rLED = 11, yLED = 12, gLED = 13, btnPin = 2, btnVal, piezoPin = A0, knockVal, quietKnock = 150, loudKnock = 300, knockNum = 0, minKnockVal=125;
+int servoPin = 10, rLED = 11, yLED = 12, gLED = 13, btnPin = 2, btnVal, piezoPin = A0, knockVal, quietKnock = 150, loudKnock = 300, knockNum = 0, minKnockVal=125, totalGoodKnocks=3;
 boolean isLocked = false;
 String unlockedMsg = "The box is unlocked", lockedMsg = "The box is locked";
 void setup() {
@@ -12,7 +12,7 @@ void setup() {
   pinMode(btnPin, INPUT);
   digitalWrite(gLED, HIGH);
   kServo.attach(10);
-  kServo.write(0);
+  kServo.write(0); // change to var
   Serial.println(unlockedMsg);
 }
 
@@ -32,14 +32,14 @@ void loop() {
   }
   if (isLocked == true) {
     knockVal = analogRead(piezoPin);
-    if (knockNum < 3 && knockVal > minKnockVal) {
+    if (knockNum < totalGoodKnocks && knockVal > minKnockVal) {
       if (checkForKnock(knockVal) == true) {
         knockNum++;
       }
-      Serial.print(3 - knockNum); // change 3 to var
+      Serial.print(totalGoodKnocks - knockNum); // change 3 to var
       Serial.println(" more knocks left"); //change to var
     }
-    if (knockNum >= 3) {
+    if (knockNum >= totalGoodKnocks) {
       isLocked = false;
       kServo.write(0); // change to var
       digitalWrite(gLED, HIGH);
