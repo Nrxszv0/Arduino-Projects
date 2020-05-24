@@ -1,6 +1,6 @@
 #include <Servo.h>
 Servo kServo;
-int servoPin = 10, rLED = 11, yLED = 12, gLED = 13, btnPin = 2, btnVal, piezoPin = A0, knockVal, quietKnock = 150, loudKnock = 300, knockNum = 0, minKnockVal=125, totalGoodKnocks=3, unlockedSerVal=0, lockedSerVal=90;
+int servoPin = 10, rLED = 11, yLED = 12, gLED = 13, btnPin = 2, btnVal, piezoPin = A0, knockVal, quietKnock = 150, loudKnock = 300, knockNum = 0, minKnockVal=125, totalGoodKnocks=3, unlockedSerVal=0, lockedSerVal=90, dly=1000, yLEDdly=50;
 boolean isLocked = false;
 String unlockedMsg = "The box is unlocked", lockedMsg = "The box is locked", knocksLeftMsg= " more knocks left";
 void setup() {
@@ -26,7 +26,7 @@ void loop() {
       digitalWrite(rLED, HIGH);
       kServo.write(lockedSerVal); //change to var
       Serial.println(lockedMsg);
-      delay(1000); //change to var
+      delay(dly); //change to var
 
     }
   }
@@ -52,7 +52,7 @@ void loop() {
 boolean checkForKnock(int value) {
   if (value > quietKnock && value < loudKnock) {
     digitalWrite(yLED, HIGH);
-    delay(50); // change to var
+    delay(yLEDdly); // change to var
     digitalWrite(yLED, LOW);
     Serial.print("Good knock value: "); // change to var
     Serial.println(value);
