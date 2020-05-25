@@ -6,12 +6,12 @@ void setup() {
   size(1, 1);
   surface.setResizable(true);
   colorMode(HSB, 255);
-  img=loadImage("http://arduino.cc/arduino_logo.png");
+  img=loadImage("https://arduino.cc/arduino_logo.png");
   surface.setSize(img.width, img.height);
   println("Available serial ports:");
-  //println(Serial.list());
+  println(Serial.list());
   port= 
-    new Serial(this, "COM5", 9600);
+    new Serial(this, Serial.list()[1], 9600);
 }
 void draw() {
   if (port.available() > 0) {
