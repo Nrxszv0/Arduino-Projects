@@ -1,4 +1,4 @@
-int contPin1 = 2, contPin2 = 10, enablePin = 11, directionBtnPin = 12, powerStateBtnPin = 13, potPin = A0, powerBtnState = 0, prevPowerBtnState = 0, directionBtnState = 0, prevDirectionBtnState = 0, motorEnabled = 0, motorSpeed = 0, motorDirection = 1;
+int contPin1 = 2, contPin2 = 10, enablePin = 11, directionBtnPin = 12, powerStateBtnPin = 13, potPin = A1, powerBtnState = 0, prevPowerBtnState = 0, directionBtnState = 0, prevDirectionBtnState = 0, motorEnabled = 0, motorSpeed = 0, motorDirection = 1;
 void setup() {
   // put your setup code here, to run once:
   pinMode(directionBtnPin, INPUT);
