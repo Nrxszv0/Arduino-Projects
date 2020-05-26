@@ -1,6 +1,5 @@
 int contPin1 = 2, contPin2 = 10, enablePin = 11, directionBtnPin = 12, powerStateBtnPin = 13, potPin = A1, powerBtnState = 0, prevPowerBtnState = 0, directionBtnState = 0, prevDirectionBtnState = 0, motorEnabled = 0, motorSpeed = 0, motorDirection = 1;
 void setup() {
-  // put your setup code here, to run once:
   pinMode(directionBtnPin, INPUT);
   pinMode(powerStateBtnPin, INPUT);
   pinMode(contPin1, OUTPUT);
@@ -10,7 +9,6 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
   powerBtnState = digitalRead(powerStateBtnPin);
   delay(1);
   directionBtnState = digitalRead(directionBtnPin);
