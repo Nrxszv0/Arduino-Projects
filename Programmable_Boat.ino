@@ -1,14 +1,18 @@
-int contPin1 = 2, contPin2 = 10, enablePin = 11, directionBtnPin = 12, powerStateBtnPin = 13, potPin = A1, powerBtnState = 0, prevPowerBtnState = 0, directionBtnState = 0, prevDirectionBtnState = 0, motorEnabled = 0, motorSpeed = 0, motorDirection = 1;
+#include <Servo.h>
+int contPin1 = 2, contPin2 = 10, enablePin = 11, directionBtnPin = 12, powerStateBtnPin = 13, potPin = A1, powerBtnState = 0, prevPowerBtnState = 0, directionBtnState = 0, prevDirectionBtnState = 0, motorEnabled = 0, motorSpeed = 0, motorDirection = 1, servoPin=9, serAng;
+Servo servo;
 void setup() {
   pinMode(directionBtnPin, INPUT);
   pinMode(powerStateBtnPin, INPUT);
   pinMode(contPin1, OUTPUT);
   pinMode(contPin2, OUTPUT);
   pinMode(enablePin, OUTPUT);
+  servo.attach(servoPin);
   digitalWrite(enablePin, LOW);
 }
 
 void loop() {
+  servo.write(13);
   powerBtnState = digitalRead(powerStateBtnPin);
   delay(1);
   directionBtnState = digitalRead(directionBtnPin);
