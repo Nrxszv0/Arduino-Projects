@@ -1,5 +1,5 @@
 #include <Servo.h>
-int contPin1 = 2, contPin2 = 10, enablePin = 11, directionBtnPin = 12, powerStateBtnPin = 13, potPin = A0, powerBtnState = 0, prevPowerBtnState = 0, directionBtnState = 0, prevDirectionBtnState = 0, motorEnabled = 0, motorSpeed = 0, motorDirection = 1, servoPin = 9, serAng, serPotPin = A5, serPotVal, maxSerAng = 165, startSerVal = 0;
+int contPin1 = 2, contPin2 = 10, enablePin = 11, directionBtnPin = 12, powerStateBtnPin = 13, potPin = A0, powerBtnState = 0, prevPowerBtnState = 0, directionBtnState = 0, prevDirectionBtnState = 0, motorEnabled = 0, motorSpeed = 0, motorDirection = 1, servoPin = 9, serAng, serPotPin = A5, serPotVal, maxSerAng = 165, startSerVal = 0, minSerAng=0;
 Servo servo;
 void setup() {
   pinMode(directionBtnPin, INPUT);
@@ -13,8 +13,8 @@ void setup() {
 }
 
 void loop() {
-  serPotVal = analogRead(A5);
-  serAng = map(serPotVal, 0, 1023, 0, maxSerAng);
+  serPotVal = analogRead(serPotPin);
+  serAng = map(serPotVal, 0, 1023, minSerAng, maxSerAng);
   servo.write(serAng);  
   powerBtnState = digitalRead(powerStateBtnPin);
   delay(1);
