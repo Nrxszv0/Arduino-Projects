@@ -1,8 +1,9 @@
 #include <Servo.h>
 int contPin1 = 4, contPin2 = 3, enablePin = 5, directionBtnPin = 12, powerStateBtnPin = 13;
 int motorSpeedBtn1 = 8, motorSpeedBtn2 = 9, motorSpeedBtn3 = 10, motorSpeedBtn4 = 11;
-int speedVal, speedVal2, speedVal3, speedVal4;
-int powerBtnState = 0, prevPowerBtnState = 0, directionBtnState = 0, prevDirectionBtnState = 0, motorEnabled = 0, motorSpeed = 0, motorDirection = 1;
+int speedVal1 = .25, speedVal2 = .5, speedVal3 = .75, speedVal4 = 1;
+int powerBtnState = 0, prevPowerBtnState = 0, directionBtnState = 0, prevDirectionBtnState = 0, motorEnabled = 0,  motorDirection = 1;
+float motorSpeed = 0;
 int servoPin = 2, serAng, serPotPin = A5, serPotVal, maxSerAng = 165, startSerVal = 0, minSerAng = 0;
 Servo servo;
 void setup() {
@@ -23,49 +24,52 @@ void setup() {
 
 void loop() {
   if (digitalRead(motorSpeedBtn1) == HIGH) {
-  Serial.println("Button 1 Pressed");
+    Serial.println("Button 1 Pressed");
+    motorSpeed = 255 * speedVal1;
   }
-  if ( digitalRead(motorSpeedBtn2) == HIGH) {
-  Serial.println("Button 2 Pressed");
+  else if ( digitalRead(motorSpeedBtn2) == HIGH) {
+    Serial.println("Button 2 Pressed");
+    motorSpeed = 255 * speedVal2;
   }
-  if ( digitalRead(motorSpeedBtn3) == HIGH) {
-  Serial.println("Button 3 Pressed");
+  else if ( digitalRead(motorSpeedBtn3) == HIGH) {
+    Serial.println("Button 3 Pressed");
+    motorSpeed = 255 * speedVal3;
   }
-  if ( digitalRead(motorSpeedBtn4) == HIGH) {
-  Serial.println("Button 4 Pressed");
+  else if ( digitalRead(motorSpeedBtn4) == HIGH) {
+    Serial.println("Button 4 Pressed");
+    motorSpeed = 255 * speedVal4;
   }
-  //  serPotVal = analogRead(serPotPin);
-  //  serAng = map(serPotVal, 0, 1023, minSerAng, maxSerAng);
-  //  servo.write(serAng);
-  //  Serial.println(serAng);
-  //  powerBtnState = digitalRead(powerStateBtnPin);
-  //  delay(1);
-  //  directionBtnState = digitalRead(directionBtnPin);
-  //  motorSpeed = 255;
-  //  if (powerBtnState != prevPowerBtnState) {
-  //    if (powerBtnState == HIGH) {
-  //      motorEnabled = !motorEnabled;
-  //    }
-  //  }
-  //  if (directionBtnState != prevDirectionBtnState) {
-  //    if (directionBtnState == HIGH) {
-  //      motorDirection = ! motorDirection;
-  //    }
-  //  }
-  //  if (motorDirection == 1) {
-  //    digitalWrite(contPin1, HIGH);
-  //    digitalWrite(contPin2, LOW);
-  //  }
-  //  else {
-  //    digitalWrite(contPin1, LOW);
-  //    digitalWrite(contPin2, HIGH);
-  //  }
-  //  if (motorEnabled == 1) {
-  //    analogWrite(enablePin, motorSpeed);
-  //  }
-  //  else {
-  //    analogWrite(enablePin, 0);
-  //  }
-  //  prevDirectionBtnState = directionBtnState;
-  //  prevPowerBtnState = powerBtnState;
+  serPotVal = analogRead(serPotPin);
+  serAng = map(serPotVal, 0, 1023, minSerAng, maxSerAng);
+  servo.write(serAng);
+  Serial.println(serAng);
+  powerBtnState = digitalRead(powerStateBtnPin);
+  delay(1);
+  directionBtnState = digitalRead(directionBtnPin);
+  if (powerBtnState != prevPowerBtnState) {
+    if (powerBtnState == HIGH) {
+      motorEnabled = !motorEnabled;
+    }
+  }
+  if (directionBtnState != prevDirectionBtnState) {
+    if (directionBtnState == HIGH) {
+      motorDirection = ! motorDirection;
+    }
+  }
+  if (motorDirection == 1) {
+    digitalWrite(contPin1, HIGH);
+    digitalWrite(contPin2, LOW);
+  }
+  else {
+    digitalWrite(contPin1, LOW);
+    digitalWrite(contPin2, HIGH);
+  }
+  if (motorEnabled == 1) {
+    analogWrite(enablePin, motorSpeed);
+  }
+  else {
+    analogWrite(enablePin, 0);
+  }
+  prevDirectionBtnState = directionBtnState;
+  prevPowerBtnState = powerBtnState;
 }
