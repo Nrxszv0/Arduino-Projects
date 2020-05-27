@@ -1,7 +1,7 @@
 #include <Servo.h>
 int contPin1 = 4, contPin2 = 3, enablePin = 5, directionBtnPin = 12, powerStateBtnPin = 13;
 int motorSpeedBtn1 = 8, motorSpeedBtn2 = 9, motorSpeedBtn3 = 10, motorSpeedBtn4 = 11;
-int speedVal1 = .25, speedVal2 = .5, speedVal3 = .75, speedVal4 = 1;
+int speedVal1 = 64, speedVal2 = 128, speedVal3 = 192, speedVal4 = 255;
 int powerBtnState = 0, prevPowerBtnState = 0, directionBtnState = 0, prevDirectionBtnState = 0, motorEnabled = 0,  motorDirection = 1;
 float motorSpeed = 0;
 int servoPin = 2, serAng, serPotPin = A5, serPotVal, maxSerAng = 165, startSerVal = 0, minSerAng = 0;
@@ -25,19 +25,19 @@ void setup() {
 void loop() {
   if (digitalRead(motorSpeedBtn1) == HIGH) {
     Serial.println("Button 1 Pressed");
-    motorSpeed = 255 * speedVal1;
+    motorSpeed = speedVal1;
   }
   else if ( digitalRead(motorSpeedBtn2) == HIGH) {
     Serial.println("Button 2 Pressed");
-    motorSpeed = 255 * speedVal2;
+    motorSpeed =  speedVal2;
   }
   else if ( digitalRead(motorSpeedBtn3) == HIGH) {
     Serial.println("Button 3 Pressed");
-    motorSpeed = 255 * speedVal3;
+    motorSpeed =  speedVal3;
   }
   else if ( digitalRead(motorSpeedBtn4) == HIGH) {
     Serial.println("Button 4 Pressed");
-    motorSpeed = 255 * speedVal4;
+    motorSpeed =  speedVal4;
   }
   serPotVal = analogRead(serPotPin);
   serAng = map(serPotVal, 0, 1023, minSerAng, maxSerAng);
