@@ -2,9 +2,8 @@
 int contPin1 = 4, contPin2 = 3, enablePin = 5, directionBtnPin = 12, powerStateBtnPin = 13;
 int motorSpeedBtn1 = 8, motorSpeedBtn2 = 9, motorSpeedBtn3 = 10, motorSpeedBtn4 = 11;
 int speedVal1 = 64, speedVal2 = 128, speedVal3 = 192, speedVal4 = 255;
-int powerBtnState = 0, prevPowerBtnState = 0, directionBtnState = 0, prevDirectionBtnState = 0, motorEnabled = 0,  motorDirection = 1;
-float motorSpeed = 0;
-int servoPin = 2, serAng, serPotPin = A5, serPotVal, maxSerAng = 165, startSerVal = 0, minSerAng = 0;
+int powerBtnState = 0, prevPowerBtnState = 0, directionBtnState = 0, prevDirectionBtnState = 0, motorEnabled = 0, motorSpeed = 0, motorDirection = 1;
+int servoPin = 2, serIncPin=7, serDecPin=8, serAng, serPotVal, maxSerAng = 165, startSerVal = 0, minSerAng = 0;
 Servo servo;
 void setup() {
   Serial.begin(9600);
