@@ -1,9 +1,9 @@
 #include <Servo.h>
 int contPin1 = 4, contPin2 = 3, enablePin = 5, directionBtnPin = 12, powerStateBtnPin = 13;
-int motorSpeedBtn1 = 8, motorSpeedBtn2 = 9, motorSpeedBtn3 = 10;
+int motorSpeedBtn1 = 9, motorSpeedBtn2 = 10, motorSpeedBtn3 = 11;
 int speedVal1 = 85, speedVal2 = 169, speedVal3 = 255;
 int powerBtnState = 0, prevPowerBtnState = 0, directionBtnState = 0, prevDirectionBtnState = 0, motorEnabled = 0, motorSpeed = 0, motorDirection = 1;
-int servoPin = 2, serIncPin=7, serDecPin=8, serAng, serPotVal, maxSerAng = 165, startSerVal = 0, minSerAng = 0, serIncVal=5;
+int servoPin = 2, serIncPin=7, serDecPin=8, serAng, maxSerAng = 165, startSerVal = 0, minSerAng = 0, serIncVal=5;
 Servo servo;
 void setup() {
   Serial.begin(9600);
@@ -12,10 +12,11 @@ void setup() {
   pinMode(contPin1, OUTPUT);
   pinMode(contPin2, OUTPUT);
   pinMode(enablePin, OUTPUT);
+  pinMode(serIncPin, INPUT);
+  pinMode(serDecPin, INPUT);
   pinMode(motorSpeedBtn1, INPUT);
   pinMode(motorSpeedBtn2, INPUT);
   pinMode(motorSpeedBtn3, INPUT);
-  pinMode(motorSpeedBtn4, INPUT);
   servo.attach(servoPin);
   digitalWrite(enablePin, LOW);
   servo.write(startSerVal);
@@ -34,12 +35,12 @@ void loop() {
     Serial.println("Button 3 Pressed");
     motorSpeed =  speedVal3;
   }
-  else if ( digitalRead(motorSpeedBtn4) == HIGH) {
-    Serial.println("Button 4 Pressed");
-    motorSpeed =  speedVal4;
+  if (digitalRead(serIncPin) == HIGH && (serAng<=maxSerAng) ) {
+    serAng=serAng+serIncVal;  
   }
-  serPotVal = analogRead(serPotPin);
-  serAng = map(serPotVal, 0, 1023, minSerAng, maxSerAng);
+  else if (digitalRead(serDecPin) == HIGH && (serAng>=maxSerAng) ) {
+    serAng=serAng-serIncVal;  
+  }
   servo.write(serAng);
   Serial.println(serAng);
   powerBtnState = digitalRead(powerStateBtnPin);
