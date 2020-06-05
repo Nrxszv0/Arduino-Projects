@@ -1,5 +1,5 @@
 #include "pitches.h"
-int piezoPin = 13, dly = 123, noteTot = 26;
+int piezoPin = 10, dly = 123, noteTot = 26;
 float bpm = 140; //quarter notes
 int notes[] = {
   NOTE_E4, NOTE_D4, NOTE_C4, NOTE_D4,
