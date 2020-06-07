@@ -1,5 +1,5 @@
 #include <Servo.h>
-int photoPin = A0, photoVal, serPin=8,serAng;
+int photoPin = A0, photoVal, serPin=8,serAng, dly=50;
 int maxSerAng=165, minSerAng=0, maxPhotoVal=830, minPhotoVal=150;
 Servo servo;
 void setup() {
@@ -17,4 +17,5 @@ void loop() {
   Serial.println(serAng);
   //Serial.println(photoVal);
   servo.write(serAng);
+  delay(dly);
 }
