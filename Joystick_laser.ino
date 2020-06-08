@@ -1,6 +1,8 @@
 #include <Servo.h>
+#include "pitches.h"
 int xPin = A0, yPin = A1, sPin = 2, xVal, yVal, sVal;
 int xSerPin=3, ySerPin=4, xSerVal, ySerVal;
+int piezoPin= 5;
 Servo xServo;
 Servo yServo;
 void setup() {
@@ -9,9 +11,10 @@ void setup() {
   pinMode(sPin, INPUT);
   pinMode(xPin, INPUT);
   pinMode(yPin, INPUT);
+  pinMode(piezoPin, OUTPUT);
   digitalWrite(sPin, HIGH); // Read without extra stuff. When you press down stuff happens
   xServo.attach(xSerPin);
-  yServo.attach(ySerPin);
+  yServo.attach(ySerPin);  
 }
 
 void loop() {
@@ -25,7 +28,10 @@ void loop() {
   Serial.print(xVal);
   Serial.print("\t\tY Value: ");
   Serial.println(yVal);
-  xServo.write(40);
-  yServo.write(50);
+  xSerVal = map(xVal, 0, 1023, 0, 165);
+  ySerVal = map(yVal, 0, 1023, 0, 165);
+  xServo.write(xSerVal);
+  yServo.write(ySerVal);
+//  tone(piezoPin, 200);
 
 }
