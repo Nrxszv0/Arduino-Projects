@@ -93,7 +93,8 @@ int notes[] = {
 };
 int xPin = A0, yPin = A1, sPin = 2, xVal, yVal, sVal, dly = 100;
 int xSerPin = 3, ySerPin = 4, xSerVal, ySerVal, minSerVal = 0, maxSerVal = 165;
-int piezoPin = 5;
+int piezoPin = 5, noteLen = 20;
+float pauseInc = 1.3, notePause = noteLen * pauseInc;
 Servo xServo;
 Servo yServo;
 void setup() {
@@ -128,15 +129,16 @@ void loop() {
   xServo.write(xSerVal);
   yServo.write(ySerVal);
   if (sVal == 0) {
-    tone(piezoPin, notes[40], 30);
-    delay(30 * 1.3);
+    tone(piezoPin, notes[40], noteLen);
+    delay(notePause);
     noTone(piezoPin);
-    tone(piezoPin, notes[41], 30);
-    delay(30 * 1.3);
+    tone(piezoPin, notes[41], noteLen);
+    delay(notePause);
     noTone(piezoPin);
   }
   else {
     noTone(piezoPin);
   }
+  delay(dly);
 
 }
