@@ -1,7 +1,7 @@
 #include <Servo.h>
 #include "pitches.h"
 int xPin = A0, yPin = A1, sPin = 2, xVal, yVal, sVal;
-int xSerPin=3, ySerPin=4, xSerVal, ySerVal;
+int xSerPin=3, ySerPin=4, xSerVal, ySerVal, minSerVal=0, maxSerVal=165;
 int piezoPin= 5;
 Servo xServo;
 Servo yServo;
@@ -28,8 +28,12 @@ void loop() {
   Serial.print(xVal);
   Serial.print("\t\tY Value: ");
   Serial.println(yVal);
-  xSerVal = map(xVal, 0, 1023, 0, 165);
-  ySerVal = map(yVal, 0, 1023, 0, 165);
+  xSerVal = map(xVal, 0, 1023, minSerVal, maxSerVal);
+  ySerVal = map(yVal, 0, 1023, minSerVal, maxSerVal);
+  Serial.print("\nX Servo Value: ");
+  Serial.print(xSerVal);
+  Serial.print("\t\tY Servo Value: ");
+  Serial.println(ySerVal);
   xServo.write(xSerVal);
   yServo.write(ySerVal);
 //  tone(piezoPin, 200);
