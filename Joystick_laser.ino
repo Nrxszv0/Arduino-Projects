@@ -134,7 +134,7 @@ void loop() {
       delay(5 * 1.3);
       noTone(piezoPin);
       Serial.println(i);
-      delay(50);
+      delay(100);
     }
   }
   else {
