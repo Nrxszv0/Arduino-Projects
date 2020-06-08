@@ -111,36 +111,32 @@ void setup() {
 void loop() {
   //  // put your main code here, to run repeatedly:
   sVal = digitalRead(sPin);
-  //  xVal = analogRead(xPin);
-  //  yVal = analogRead(yPin);
-  //  Serial.print("Switch Value: ");
-  //  Serial.print(sVal);
-  //  Serial.print("\t\tX Value: ");
-  //  Serial.print(xVal);
-  //  Serial.print("\t\tY Value: ");
-  //  Serial.println(yVal);
-  //  xSerVal = map(xVal, 0, 1023, minSerVal, maxSerVal);
-  //  ySerVal = map(yVal, 0, 1023, minSerVal, maxSerVal);
-  //  Serial.print("\nX Servo Value: ");
-  //  Serial.print(xSerVal);
-  //  Serial.print("\t\tY Servo Value: ");
-  //  Serial.println(ySerVal);
-  //  xServo.write(xSerVal);
-  //  yServo.write(ySerVal);
+  xVal = analogRead(xPin);
+  yVal = analogRead(yPin);
+  Serial.print("Switch Value: ");
+  Serial.print(sVal);
+  Serial.print("\t\tX Value: ");
+  Serial.print(xVal);
+  Serial.print("\t\tY Value: ");
+  Serial.println(yVal);
+  xSerVal = map(xVal, 0, 1023, minSerVal, maxSerVal);
+  ySerVal = map(yVal, 0, 1023, minSerVal, maxSerVal);
+  Serial.print("\nX Servo Value: ");
+  Serial.print(xSerVal);
+  Serial.print("\t\tY Servo Value: ");
+  Serial.println(ySerVal);
+  xServo.write(xSerVal);
+  yServo.write(ySerVal);
   if (sVal == 0) {
-    for (int i = 0; i <=sizeof(notes); i++) {
-      tone(piezoPin, notes[i], 5);
-      
-      delay(5 * 1.3);
-      noTone(piezoPin);
-      Serial.println(i);
-      delay(100);
-    }
+    tone(piezoPin, notes[40], 30);
+    delay(30 * 1.3);
+    noTone(piezoPin);
+    tone(piezoPin, notes[41], 30);
+    delay(30 * 1.3);
+    noTone(piezoPin);
   }
   else {
     noTone(piezoPin);
   }
-  //  //  tone(piezoPin, 200);
-  //  delay(dly);
 
 }
