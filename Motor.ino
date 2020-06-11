@@ -11,8 +11,12 @@ void loop() {
   // put your main code here, to run repeatedly:
 digitalWrite(dirP1, HIGH);
 digitalWrite(dirP2, LOW);
-analogWrite(speedPin, 255);
-delay(100);
-analogWrite(speedPin, mSpeed);
-delay(5000);
+if(millis() <=100){
+  analogWrite(speedPin, 255);
+
+}
+else{
+  analogWrite(speedPin, mSpeed);
+}
+
 }
