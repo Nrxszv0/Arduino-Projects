@@ -1,4 +1,4 @@
-int speedPin = 5, dirP1 = 6, dirP2 = 7, mSpeed = 0, boostTime = 25, boostSpeed = 255;
+int speedPin = 5, dirP1 = 6, dirP2 = 7, mSpeed = 0, boostTime = 25, boostSpeed = 255, dly=100;
 int tiltPin = 8, tiltState, tipSpeed = 0;
 int incPin = 10, decPin = 9, incVal = 5, incDecVal = 0;
 void setup() {
@@ -27,6 +27,7 @@ void loop() {
   }
   else if (tiltState == LOW) {
     mSpeed = 0;
+    analogWrite(speedPin, tipSpeed);
   }
   Serial.print("mSpeed: ");
   Serial.print(mSpeed);
@@ -34,26 +35,23 @@ void loop() {
   Serial.print(incDecVal);
   Serial.print("\t\ttiltState: ");
   Serial.println(tiltState);
-  if (mSpeed < 0) {
+  if (incDecVal < 0) {
     digitalWrite(dirP1, HIGH);
     digitalWrite(dirP2, LOW);
   }
-  else if (mSpeed > 0) {
+  else if (incDecVal > 0) {
     digitalWrite(dirP1, LOW);
     digitalWrite(dirP2, HIGH);
   }
-  //  if (millis() <= boostTime && tiltState == HIGH) {
-  //    analogWrite(speedPin, boostSpeed);
-  //
-  //  }
-  //  else if (tiltState == HIGH) {
-  //    analogWrite(speedPin, mSpeed);
-  //  }
-  //  else {
-  //    analogWrite(speedPin, tipSpeed);
-  //  }
+  
   if ( mSpeed > 255) {
-    mSpeed = 255;
-    incDecVal=255;
+    mSpeed = 250;
+    if(incDecVal > 0) {
+      incDecVal=250;
+    }
+    else if(incDecVal <0){
+      incDecVal=-250;
+    }
   }
+  delay(dly);
 }
