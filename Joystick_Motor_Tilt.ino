@@ -1,4 +1,4 @@
-int speedPin = 5, dirP1 = 6, dirP2 = 7, mSpeed = 100, boostTime = 25, boostSpeed = 255;
+int speedPin = 5, dirP1 = 6, dirP2 = 7, mSpeed = 100, boostTime = 25, boostSpeed = 255, dly=100;
 int tiltPin = 8, tiltState, tipSpeed = 0;
 int xPin = A0, yPin = A1, sPin = 2, xVal, yVal, sVal, midSpeed=0;
 void setup() {
@@ -55,6 +55,6 @@ void loop() {
   }
   Serial.print("\t\tmSpeed: ");
   Serial.println(mSpeed);
-  delay(100);
+  delay(dly);
 
 }
