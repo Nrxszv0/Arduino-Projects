@@ -13,6 +13,8 @@ void loop() {
   for (byte LED = 0b00000000; LED <= 255; LED++) {
     Serial.print(LED, BIN);
     Serial.print(" = ");
+    Serial.print(LED, HEX);
+    Serial.print(" = ");
     Serial.println(LED, DEC);
     digitalWrite(latchPin, LOW);
     shiftOut(dataPin, clockPin, LSBFIRST, LED);
