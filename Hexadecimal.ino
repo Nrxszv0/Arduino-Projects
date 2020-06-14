@@ -1,5 +1,5 @@
-int dly=500;
-byte myByte=0xAB;
+int dly=500, num=0;
+byte myByte=0x0;
 void setup() {
   // put your setup code here, to run once:
 Serial.begin(9600);
@@ -7,7 +7,10 @@ Serial.begin(9600);
 
 void loop() {
   // put your main code here, to run repeatedly:
-Serial.println(myByte,BIN);
+Serial.print(myByte,HEX);
+Serial.print(" = ");
+Serial.println(num);
 myByte = myByte+1;
+num = num+1;
 delay(dly);
 }
