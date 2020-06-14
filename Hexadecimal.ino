@@ -1,5 +1,5 @@
-int dly=500, num=0;
-byte myByte=0x0;
+int dly=1000, num=0;
+byte myByte=10;
 void setup() {
   // put your setup code here, to run once:
 Serial.begin(9600);
