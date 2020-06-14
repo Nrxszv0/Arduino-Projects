@@ -1,6 +1,7 @@
 int latchPin=11, clockPin=10,dataPin=12;
 int dly=250;
-byte LEDs=0b00000000, LED2s=0b00000001;
+byte LEDs=0b01010101;
+byte LED2s=0b10101010;
 void setup() {
   // put your setup code here, to run once:
 pinMode(latchPin, OUTPUT);
