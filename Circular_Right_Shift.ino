@@ -11,7 +11,7 @@ byte LEDs[] = {
   1,
   128
 };
-byte LED = 0b00000001;
+byte LED = 0b00010011;
 byte sLED;
 void setup() {
   // put your setup code here, to run once:
