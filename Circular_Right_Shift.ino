@@ -11,7 +11,7 @@ byte LEDs[] = {
   1,
   128
 };
-byte LED = 0b00010011;
+byte LED = 0b10000000;
 byte sLED;
 void setup() {
   // put your setup code here, to run once:
@@ -26,8 +26,8 @@ void loop() {
   digitalWrite(latchPin, LOW);
   shiftOut(dataPin, clockPin, LSBFIRST, LED);
   digitalWrite(latchPin, HIGH);
-  Serial.print("DEC: ");
-  Serial.println(LED, DEC);
-  LED = (LED/128) + (LED * 2);  
+  Serial.print("BIN: ");
+  Serial.println(LED, BIN);
+  LED = (LED*128) + (LED / 2);  
   delay(dly);
 }
