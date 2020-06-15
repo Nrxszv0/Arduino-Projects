@@ -28,7 +28,7 @@ void loop() {
   digitalWrite(latchPin, HIGH);
   Serial.print("DEC: ");
   Serial.println(LED, DEC);
-  LED = LED * 2;
+  LED = (LED/128) + (LED * 2);
   if (LED < 1 ) {
     LED = sLED;
   }
