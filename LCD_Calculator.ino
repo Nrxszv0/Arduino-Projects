@@ -10,7 +10,7 @@ void setup() {
   lcd.setCursor(0, 0);
 
 }
-void loop() {
+void loop() {  
   lcd.print("Enter First");
   lcd.setCursor(0, 1);
   lcd.print("Number");
@@ -45,7 +45,7 @@ void loop() {
     val = firstNum - secondNum;
   }
   else if (operation == "*") {
-    val = firstNum - secondNum;
+    val = firstNum * secondNum;
   }
   else if (operation == "/") {
     val = firstNum / secondNum;
@@ -55,14 +55,14 @@ void loop() {
   }
   else {
     Serial.print(operation);
-    Serial.print(" is not a valid operation");
+    Serial.print(" is not a valid operation\n");
     lcd.print(operation);
     lcd.print(" is invalid");
     lcd.setCursor(0, 1);
     lcd.print("\"r\" to restart");
     operation = "ERR";
     
-    Serial.print("Enter \"r\" to restart");      
+    Serial.print("Enter \"r\" to restart\n");      
   }
   if (operation != "ERR"); {
     Serial.print(firstNum);
@@ -90,6 +90,7 @@ void loop() {
   }
   if(Serial.readString() == "r") {
     lcd.clear();
+    Serial.println();
   }
   
   
