@@ -1,4 +1,4 @@
-int latchPin = 11, clockPin = 10, dataPin = 12, maxLED = 255;
+int latchPin = 3, clockPin = 2, dataPin = 4, maxLED = 255;
 int dly = 250;
 byte LED = 0xAA;
 void setup() {
