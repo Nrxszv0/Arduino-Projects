@@ -10,10 +10,13 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 lcd.setCursor(0,0);
-lcd.print("Hello");
-lcd.setCursor(0,1);
-lcd.print("What's up");
-
-
-
+lcd.print("Imma count cuh");
+delay(500);
+for (int c=1; c<=10; c++) {
+  lcd.setCursor(0,1);
+  lcd.print(c);
+  delay(500);
+  
+}
+lcd.clear();
 }
