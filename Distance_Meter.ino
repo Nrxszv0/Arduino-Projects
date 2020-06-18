@@ -1,7 +1,8 @@
 int trigPin = 12, echoPin = 13, pingTime;
 int dly = 25, sDly = 10;
-int rateMi = 767, rateFt, rateIn;
-float tim, distance;
+int rateMi = 767;
+float  ft = 5280, in = 12;
+float pingTravelDistance, targetDistance;
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
@@ -18,14 +19,18 @@ void loop() {
   delayMicroseconds(sDly);
   digitalWrite(trigPin, LOW);
   pingTime = pulseIn(echoPin, HIGH);
+  Serial.print("Ping Time: ");
   Serial.print(pingTime);
 
   //  rateFt = rateMi * 5280;
   //  rateIn = rateFt * 12;
   //  Serial.println(rateIn);
   //  tim = .5 * pingTime;
-  distance = ((rateMi)*(5280)*(12)*(1)*(1)) / ((1)*(1)*(1)*(3600)*(1000000)) * pingTime; //inches/microseconds
-  Serial.print("\t\t");
-  Serial.println(distance);
+  pingTravelDistance = (pingTime * 767.* 5280. *12.) / (3600. * 1000000.); //inches/microseconds
+  targetDistance = pingTravelDistance / 2;
+   Serial.print("\t\tPing Travel Distance: ");
+  Serial.print(pingTravelDistance);
+  Serial.print("\t\tTarget Distance: ");
+  Serial.println(targetDistance);
   delay(dly);
 }
