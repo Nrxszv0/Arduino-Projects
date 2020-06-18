@@ -23,8 +23,8 @@ void loop() {
   //  rateFt = rateMi * 5280;
   //  rateIn = rateFt * 12;
   //  Serial.println(rateIn);
-  tim = .5 * pingTime;
-  distance = (((rateMi * tim) / 5280) / 12);
+  //  tim = .5 * pingTime;
+  distance = ((rateMi)*(5280)*(12)*(1)*(1)) / ((1)*(1)*(1)*(3600)*(1000000)) * pingTime; //inches/microseconds
   Serial.print("\t\t");
   Serial.println(distance);
   delay(dly);
