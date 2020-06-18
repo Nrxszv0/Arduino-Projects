@@ -6,7 +6,7 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  for (i = 0; i < 2 * 2.3141519265; i = i + .01) {
+  for (i = 0; i <= 2 * 3.141519265; i = i + .01) {
     cosVal = cos(i);
     sinVal = sin(i);
     Serial.print(cosVal);
