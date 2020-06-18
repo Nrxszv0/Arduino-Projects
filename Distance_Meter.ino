@@ -1,6 +1,6 @@
 int trigPin = 12, echoPin = 13, pingTime;
 int dly = 25, sDly = 10;
-int rateMi = 767;
+float rateMi = 767;
 float  ft = 5280, in = 12;
 float pingTravelDistance, targetDistance;
 void setup() {
@@ -22,13 +22,9 @@ void loop() {
   Serial.print("Ping Time: ");
   Serial.print(pingTime);
 
-  //  rateFt = rateMi * 5280;
-  //  rateIn = rateFt * 12;
-  //  Serial.println(rateIn);
-  //  tim = .5 * pingTime;
-  pingTravelDistance = (pingTime * 767.* 5280. *12.) / (3600. * 1000000.); //inches/microseconds
+  pingTravelDistance = (pingTime * rateMi* ft *in) / (3600. * 1000000.); //inches/microseconds
   targetDistance = pingTravelDistance / 2;
-   Serial.print("\t\tPing Travel Distance: ");
+  Serial.print("\t\tPing Travel Distance: ");
   Serial.print(pingTravelDistance);
   Serial.print("\t\tTarget Distance: ");
   Serial.println(targetDistance);
