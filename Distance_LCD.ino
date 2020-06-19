@@ -35,8 +35,9 @@ void loop() {
 
   lcd.print("Distance Meter");
   lcd.setCursor(0, 1);
-  lcd.print("Distance: ");
+  lcd.print("Distance:");
   lcd.print(targetDistance);
+  lcd.print("in");
   delay(dly);
   lcd.clear();
 
