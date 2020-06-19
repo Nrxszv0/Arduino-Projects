@@ -3,6 +3,7 @@ int rs = 7, e = 6, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
 int columns = 16, rows = 2;
 int trigPin = 12, echoPin = 13, pingTime;
 int sDly = 10, dly = 250;
+float speedOfSound = 767, ft = 5280, in = 12;
 float targetDistance, pingTravelDistance;
 LiquidCrystal lcd(rs, e, d4, d5, d6, d7);
 void setup() {
@@ -23,7 +24,7 @@ void loop() {
   digitalWrite(trigPin, LOW);
   delayMicroseconds(sDly);
   pingTime = pulseIn(echoPin, HIGH);
-  pingTravelDistance = (pingTime * 767. * 5280.*12.) / (3600. * 1000000.);
+  pingTravelDistance = (pingTime * speedOfSound * ft * in) / (3600. * 1000000.);
   targetDistance = pingTravelDistance / 2.;
   Serial.print("Ping Time: ");
   Serial.print(pingTime);
@@ -33,7 +34,7 @@ void loop() {
   Serial.println(targetDistance);
 
   lcd.print("Distance Meter");
-  lcd.setCursor(0,1);
+  lcd.setCursor(0, 1);
   lcd.print("Distance: ");
   lcd.print(targetDistance);
   delay(dly);
