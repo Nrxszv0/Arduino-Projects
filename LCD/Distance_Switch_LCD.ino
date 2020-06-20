@@ -4,6 +4,7 @@ int columns = 16, rows = 2;
 int sPin = 8, sVal;
 int trigPin = 12, echoPin = 13;
 int ping;
+String unit="in";
 float pingTotalDistance, targetDistance, prevTargetDistance;
 float soundSpeed = 767, ftInMi = 5280, inInFt = 12, sInHr = 3600, usInSec = 1000000;
 int dly = 250, sDly = 10;
@@ -16,7 +17,6 @@ void setup() {
   pinMode(sPin, INPUT);
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
-
 }
 
 void loop() {
@@ -36,19 +36,14 @@ void loop() {
     targetDistance = pingTotalDistance / 2;
     Serial.println(targetDistance);
     lcd.print(targetDistance);
-    lcd.print("in");
+    lcd.print(unit);
     prevTargetDistance = targetDistance;
   }
   else {
     Serial.println("Press the button to measure.");
     lcd.print(prevTargetDistance);
-    lcd.print("in"); // change to unit
+    lcd.print(unit); 
   }
-  delay(250);
+  delay(dly);
   lcd.clear();
-
-
-
-
-
 }
