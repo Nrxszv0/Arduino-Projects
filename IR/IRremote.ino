@@ -3,7 +3,7 @@ int irPin = 10;
 IRrecv IR(irPin);
 decode_results cmd;
 String command = "";
-int zero = 0xFF6897;
+int dly = 1500;
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
@@ -15,8 +15,7 @@ void loop() {
   while (IR.decode(&cmd) == 0) {
 
   }
-  Serial.println(cmd.value, HEX);
-  delay(1500);
+  delay(dly);
   IR.resume();
   if (cmd.value == 0xFFA25D) {
     command = "pwr";
