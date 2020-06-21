@@ -3,7 +3,7 @@ int irPin = 10;
 IRrecv IR(irPin);
 decode_results cmd;
 String command = "";
-int dly = 1500;
+int dly = 250;
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
