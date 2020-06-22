@@ -6,7 +6,6 @@ String command = "";
 int dly = 250;
 int speedPin = 5, dirPin1 = 4, dirPin2 = 3;
 int speedVal = 100, speedIncrement = 25, disabledSpeedVal = 0;;
-int i = 1;
 boolean motorEnabled = false;
 void setup() {
   // put your setup code here, to run once:
@@ -32,7 +31,7 @@ void loop() {
     motorEnabled = true;
 
   }
-  if (cmd.value == 0xFF629D && motorEnabled == true &&speedVal <=255) {
+  if (cmd.value == 0xFF629D && motorEnabled == true && speedVal <= 255) {
     command = "vol+";
     speedVal += speedIncrement;
     Serial.print(command);
@@ -43,7 +42,7 @@ void loop() {
     command = "stop";
     Serial.print(command);
     Serial.println(", Motor Disabled");
-    motorEnabled = false;    
+    motorEnabled = false;
     analogWrite(speedPin, disabledSpeedVal);
   }
   if (cmd.value == 0xFF22DD && motorEnabled == true) {
@@ -60,26 +59,21 @@ void loop() {
     digitalWrite(dirPin1, HIGH);
     digitalWrite(dirPin2, LOW);
   }
-  if (cmd.value == 0xFFA857 && motorEnabled == true && speedVal >=0) {
+  if (cmd.value == 0xFFA857 && motorEnabled == true && speedVal >= 0) {
     command = "vol-";
-     speedVal -= speedIncrement;
+    speedVal -= speedIncrement;
     Serial.print(command);
     Serial.print(", Speed Decreased, Speed = ");
     Serial.print(speedVal);
-   
+
   }
   if (motorEnabled == true) {
     analogWrite(speedPin, speedVal);
   }
-  if(speedVal >255) {
+  if (speedVal > 255) {
     speedVal = 255;
   }
-  if(speedVal <0) {
+  if (speedVal < 0) {
     speedVal = 0;
   }
-
-
-
-
-
 }
