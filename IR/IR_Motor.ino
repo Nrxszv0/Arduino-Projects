@@ -5,7 +5,7 @@ decode_results cmd;
 String command = "";
 int dly = 250;
 int speedPin = 5, dirPin1 = 4, dirPin2 = 3;
-int speedVal = 125, speedIncrement = 25, disabledSpeedVal = 0;;
+int speedVal = 130, speedIncrement = 25, disabledSpeedVal = 0;;
 boolean motorEnabled = false;
 void setup() {
   // put your setup code here, to run once:
