@@ -32,40 +32,44 @@ void loop() {
     motorEnabled = true;
 
   }
-   if (cmd.value == 0xFF629D && motorEnabled == true) {
+  if (cmd.value == 0xFF629D && motorEnabled == true) {
     command = "vol+";
-    Serial.print(command);
-    Serial.println(", Speed Increased");
     speedVal += speedIncrement;
+    Serial.print(command);
+    Serial.print(", Speed Increased, Speed = ");
+    Serial.println(speedVal);
   }
-   if (cmd.value == 0xFFE21D) {
+  if (cmd.value == 0xFFE21D) {
     command = "stop";
     Serial.print(command);
     Serial.println(", Motor Disabled");
     motorEnabled = false;
     speedVal = 0;
+    analogWrite(speedPin, speedVal);
   }
-   if (cmd.value == 0xFF22DD && motorEnabled == true) {
+  if (cmd.value == 0xFF22DD && motorEnabled == true) {
     command = "rew";
     Serial.print(command);
     Serial.println(", Motor Direction Reverse");
     digitalWrite(dirPin1, LOW);
     digitalWrite(dirPin2, HIGH);
   }
-   if (cmd.value == 0xFFC23D && motorEnabled == true) {
+  if (cmd.value == 0xFFC23D && motorEnabled == true) {
     command = "FF";
     Serial.print(command);
     Serial.println(", Motor Direction Normal");
     digitalWrite(dirPin1, HIGH);
     digitalWrite(dirPin2, LOW);
   }
-   if ((cmd.value == 0xFFA857) && (motorEnabled == true)) {
+  if ((cmd.value == 0xFFA857) && (motorEnabled == true)) {
     command = "vol-";
+     speedVal -= speedIncrement;
     Serial.print(command);
-    Serial.println(", Speed Decreased");
-    speedVal -= speedIncrement;
+    Serial.print(", Speed Decreased, Speed = ");
+    Serial.print(speedVal);
+   
   }
-    if (motorEnabled == true) {
+  if (motorEnabled == true) {
     analogWrite(speedPin, speedVal);
   }
 
