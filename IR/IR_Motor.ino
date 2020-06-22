@@ -5,7 +5,7 @@ decode_results cmd;
 String command = "";
 int dly = 250;
 int speedPin = 5, dirPin1 = 4, dirPin2 = 3;
-int speedVal = 100, speedIncrement = 5;
+int speedVal = 100, speedIncrement = 25;
 int i = 1;
 boolean motorEnabled = false;
 void setup() {
@@ -19,10 +19,6 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  if (motorEnabled == true) {
-    analogWrite(speedPin, speedVal);
-  }
-
   while (IR.decode(&cmd) == 0) {
 
   }
@@ -47,6 +43,7 @@ void loop() {
     Serial.print(command);
     Serial.println(", Motor Disabled");
     motorEnabled = false;
+    speedVal = 0;
   }
    if (cmd.value == 0xFF22DD && motorEnabled == true) {
     command = "rew";
@@ -54,10 +51,6 @@ void loop() {
     Serial.println(", Motor Direction Reverse");
     digitalWrite(dirPin1, LOW);
     digitalWrite(dirPin2, HIGH);
-  }
-   if (cmd.value == 0xFF02FD) {
-    command = "pause";
-    Serial.println(command);
   }
    if (cmd.value == 0xFFC23D && motorEnabled == true) {
     command = "FF";
@@ -71,6 +64,9 @@ void loop() {
     Serial.print(command);
     Serial.println(", Speed Decreased");
     speedVal -= speedIncrement;
+  }
+    if (motorEnabled == true) {
+    analogWrite(speedPin, speedVal);
   }
 
 
