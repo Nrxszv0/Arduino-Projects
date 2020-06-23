@@ -87,7 +87,7 @@ void loop() {
     Serial.print(SST);
     Serial.println(speedVal);
   }
-  if (cmd.value == 0xFF6897) {
+  if (cmd.value == 0xFF30CF) {
     command = "one";
     speedVal = speedVals[0];
     Serial.print(command);
