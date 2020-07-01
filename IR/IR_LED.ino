@@ -100,19 +100,31 @@ void loop() {
     gVal = pink[1];
     bVal = pink[2];
   }
-  if ((cmd.value == 0xFFE01F || cmd.value == 0xF076C13B) && (rVal >= 0 && gVal >= 0 && bVal >= 0)) {
+  if ((cmd.value == 0xFFE01F || cmd.value == 0xF076C13B)) {
     command = "down";
-    rVal -= dimIncrement;
-    gVal -= dimIncrement;
-    bVal -= dimIncrement;
     dimVal -= dimIncrement;
+    if (rVal > 0) {
+      rVal -= dimIncrement;
+    }
+    if (gVal > 0) {
+      gVal -= dimIncrement;
+    }
+    if (bVal > 0) {
+      bVal -= dimIncrement;
+    }
   }
   if ((cmd.value == 0xFF906F || cmd.value == 0xE5CFBD7F) && (rVal <= 255 && gVal <= 255 && bVal <= 255)) {
     command = "up";
-    rVal += dimIncrement;
-    gVal += dimIncrement;
-    bVal += dimIncrement;
     dimVal += dimIncrement;
+    if (rVal < 255) {
+      rVal += dimIncrement;
+    }
+    if (gVal < 255) {
+      gVal += dimIncrement;
+    }
+    if (bVal < 255) {
+      bVal += dimIncrement;
+    }
   }
   Serial.print(command);
   if (command == "up" || command == "down") {
