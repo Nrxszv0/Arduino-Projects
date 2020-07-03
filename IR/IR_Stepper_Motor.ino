@@ -1,10 +1,10 @@
 #include <Stepper.h>
 #include <IRremote.h>
 int stepsPerRevolution = 2048, stepSpeed = 13, dly = 250;
-int N1 = 5, N2 = 4, N3 = 3, N4 = 2;
+int N1 = 7, N2 = 6, N3 = 5, N4 = 4;
 int stepVal = 1024;
 String command = "";
-int irPin = 6;
+int irPin = 9;
 Stepper stepMotor(stepsPerRevolution, N1, N3, N2, N4);
 IRrecv IR(irPin);
 decode_results cmd;
@@ -18,7 +18,7 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-//  stepMotor.step(1);
+//  stepMotor.step(-1024);
   while(IR.decode(&cmd) == 0) {
     
   }
