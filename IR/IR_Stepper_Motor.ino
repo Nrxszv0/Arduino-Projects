@@ -2,7 +2,7 @@
 #include <IRremote.h>
 int stepsPerRevolution = 2048, stepSpeed = 13, dly = 250;
 int N1 = 5, N2 = 4, N3 = 3, N4 = 2;
-int stepVal = 256;
+int stepVal = 1024;
 String command = "";
 int irPin = 6;
 Stepper stepMotor(stepsPerRevolution, N1, N3, N2, N4);
@@ -45,12 +45,12 @@ void loop() {
     Serial.print(command);
     Serial.println(", Stepper Moving Counter Clockwise");
   }
-  if ((cmd.value == 0xFF906F || cmd.value ==0xE5CFBD7F && stepEnabled)) {
+  if ((cmd.value == 0xFF906F || cmd.value ==0xE5CFBD7F) && stepEnabled) {
     command = "up"; 
     stepCW = false;  
     stepCC = true;
     Serial.print(command);
-    Serial.println(", Stepper Moving Counter Clockwise");
+    Serial.println(", Stepper Moving Clockwise");
   }
 
   if(stepCW && stepEnabled){
