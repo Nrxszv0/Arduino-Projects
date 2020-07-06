@@ -1,6 +1,7 @@
 #include <LiquidCrystal.h>
 #include <Servo.h>
 #include <DHT.h>
+#include <IRremote.h>
 #define TYPE DHT11
 int htPin = 2;
 float humidity, tempC, tempF;
@@ -26,6 +27,11 @@ Servo ser12;
 int tempPin = A0;
 int baseTemp = 24, sensVal;
 float voltage, tempC2, tempF2;
+int irPin = 13;
+String command = "";
+IRrecv IR(irPin);
+decode_results cmd;
+unsigned long val, preMillis;
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
@@ -50,13 +56,15 @@ void setup() {
   ser12.attach(ser12Pin);
 
   HT.begin();
+
+  IR.enableIRIn();
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-getDHTVals();
-getTempVals();
-
+  //getDHTVals();
+  //getTempVals();
+  getIRVal();
 }
 void moveServos(int sersVal) {
   ser1.write(sersVal);
@@ -96,4 +104,59 @@ void getTempVals() {
   Serial.print(tempC2);
   Serial.print("\tTF2: ");
   Serial.println(tempF2);
+}
+void getIRVal() {
+  if (IR.decode(&cmd)) {
+    preMillis = millis();
+    val = cmd.value;
+    Serial.print(val, HEX);
+    IR.resume();
+    switch (val) {
+      case 0xFFA25D:
+      case 0xE318261B: command = "pwr"; break;
+      case 0xFF629D:
+      case 0x511DBB: command = "vol+"; break;
+      case 0xFFE21D:
+      case 0xEE886D7F: command = "stop"; break;
+      case 0xFF22DD:
+      case 0x52A3D41F: command = "rew"; break;
+      case 0xFF02FD:
+      case 0xD7E84B1B: command = "pause"; break;
+      case 0xFFC23D:
+      case 0x20FE4DBB: command = "FF"; break;
+      case 0xFFE01F:
+      case 0xF076C13B: command = "down"; break;
+      case 0xFFA857:
+      case 0xA3C8EDDB: command = "vol-"; break;
+      case 0xFF906F:
+      case 0xE5CFBD7F: command = "up"; break;
+      case 0xFF6897:
+      case 0xC101E57B: command = "zero"; break;
+      case 0xFF9867:
+      case 0x97483BFB: command = "eq"; break;
+      case 0xFFB04F:
+      case 0xF0C41643: command = "rept"; break;
+      case 0xFF30CF:
+      case 0x9716BE3F: command = "one"; break;
+      case 0xFF18E7:
+      case 0x3D9AE3F7: command = "two"; break;
+      case 0xFF7A85:
+      case 0x6182021B: command = "three"; break;
+      case 0xFF10EF:
+      case 0x8C22657B: command = "four"; break;
+      case 0xFF38C7:
+      case 0x488F3CBB: command = "five"; break;
+      case 0xFF5AA5:
+      case 0x449E79F: command = "six"; break;
+      case 0xFF42BD:
+      case 0x32C6FDF7: command = "seven"; break;
+      case 0xFF4AB5:
+      case 0x1BC0157B: command = "eight"; break;
+      case 0xFF52AD:
+      case 0x3EC3FC1B: command = "nine"; break;
+      default: command = "null"; break;
+    }
+    Serial.print("==");
+    Serial.println(command);
+  }
 }
