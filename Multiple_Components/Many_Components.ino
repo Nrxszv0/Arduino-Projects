@@ -32,6 +32,9 @@ String command = "";
 IRrecv IR(irPin);
 decode_results cmd;
 unsigned long val, preMillis;
+int trigPin = 12, echoPin = 10;
+float pingTime, distanceIn;
+int ssDly = 2, sDly = 20, microsecondsToInchVal = 148; //For speed of sound
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
@@ -58,12 +61,16 @@ void setup() {
   HT.begin();
 
   IR.enableIRIn();
+
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  //getDHTVals();
-  //getTempVals();
+  getDHTVals();
+  getTempVals();
+  getDistance();
   getIRVal();
 }
 void moveServos(int sersVal) {
@@ -96,19 +103,33 @@ void getTempVals() {
   voltage = (sensVal / 1024.0) * 5.0;
   tempC2 = (voltage - 0.5) * 100.0;
   tempF2 = (tempC2 * 1.8) + 32;
-  Serial.print("SV: ");
+  Serial.print("\tSV: ");
   Serial.print(sensVal);
   Serial.print("\tV: ");
   Serial.print(voltage);
   Serial.print("\tTC2: ");
   Serial.print(tempC2);
   Serial.print("\tTF2: ");
-  Serial.println(tempF2);
+  Serial.print(tempF2);
+}
+void getDistance() {
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(ssDly);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(sDly);
+  digitalWrite(trigPin, LOW);
+  pingTime = pulseIn(echoPin, HIGH);
+  distanceIn = pingTime / microsecondsToInchVal;
+  Serial.print("\tPT: ");
+  Serial.print(pingTime);
+  Serial.print("DIn: ");
+  Serial.println(distanceIn);
 }
 void getIRVal() {
   if (IR.decode(&cmd)) {
     preMillis = millis();
     val = cmd.value;
+    Serial.println();
     Serial.print(val, HEX);
     IR.resume();
     switch (val) {
