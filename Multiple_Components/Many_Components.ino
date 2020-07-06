@@ -23,6 +23,9 @@ Servo ser9;
 Servo ser10;
 Servo ser11;
 Servo ser12;
+int tempPin = A0;
+int baseTemp = 24, sensVal;
+float voltage, tempC2, tempF2;
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
@@ -51,15 +54,9 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-humidity =HT.readHumidity();
-tempC = HT.readTemperature();
-tempF = HT.readTemperature(true);
-Serial.print("H:");
-Serial.print(humidity);
-Serial.print("\t\t\TC: ");
-Serial.print(tempC);
-Serial.print("\t\tTF: ");
-Serial.println(tempF);
+getDHTVals();
+getTempVals();
+
 }
 void moveServos(int sersVal) {
   ser1.write(sersVal);
@@ -74,4 +71,29 @@ void moveServos(int sersVal) {
   ser10.write(sersVal);
   ser11.write(sersVal);
   ser12.write(sersVal);
+}
+void getDHTVals() {
+  humidity = HT.readHumidity();
+  tempC = HT.readTemperature();
+  tempF = HT.readTemperature(true);
+  Serial.print("H:");
+  Serial.print(humidity);
+  Serial.print("\tTC: ");
+  Serial.print(tempC);
+  Serial.print("\tTF: ");
+  Serial.print(tempF);
+}
+void getTempVals() {
+  sensVal = analogRead(tempPin);
+  voltage = (sensVal / 1024.0) * 5.0;
+  tempC2 = (voltage - 0.5) * 100.0;
+  tempF2 = (tempC2 * 1.8) + 32;
+  Serial.print("SV: ");
+  Serial.print(sensVal);
+  Serial.print("\tV: ");
+  Serial.print(voltage);
+  Serial.print("\tTC2: ");
+  Serial.print(tempC2);
+  Serial.print("\tTF2: ");
+  Serial.println(tempF2);
 }
