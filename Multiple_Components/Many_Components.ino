@@ -35,6 +35,8 @@ unsigned long val, preMillis;
 int trigPin = 12, echoPin = 10;
 float pingTime, distanceIn;
 int ssDly = 2, sDly = 20, microsecondsToInchVal = 148; //For speed of sound
+int photoPin1 = A1, photoPin2 = A2, photoPin3 = A3, photoPin4 = A4, photoPin5 = A5, photoPin6 = A6, photoPin7 = A7, photoPin8 = A8;
+int photoVal1, photoVal2, photoVal3, photoVal4, photoVal5, photoVal6, photoVal7, photoVal8;
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
@@ -71,6 +73,7 @@ void loop() {
   getDHTVals();
   getTempVals();
   getDistance();
+  getPhotoVals();
   getIRVal();
 }
 void moveServos(int sersVal) {
@@ -123,8 +126,35 @@ void getDistance() {
   Serial.print("\tPT: ");
   Serial.print(pingTime);
   Serial.print("DIn: ");
-  Serial.println(distanceIn);
+  Serial.print(distanceIn);
 }
+void getPhotoVals() {
+  photoVal1 = analogRead(photoPin1);
+  photoVal2 = analogRead(photoPin2);
+  photoVal3 = analogRead(photoPin3);
+  photoVal4 = analogRead(photoPin4);
+  photoVal5 = analogRead(photoPin5);
+  photoVal6 = analogRead(photoPin6);
+  photoVal7 = analogRead(photoPin7);
+  photoVal8 = analogRead(photoPin8);
+  Serial.print("\tPV1: ");
+  Serial.print(photoVal1);
+  Serial.print("\tPV2: ");
+  Serial.print(photoVal2);
+  Serial.print("\tPV3: ");
+  Serial.print(photoVal3);
+  Serial.print("\tPV4: ");
+  Serial.print(photoVal4);
+  Serial.print("\tPV5: ");
+  Serial.print(photoVal5);
+  Serial.print("\tPV6: ");
+  Serial.print(photoVal6);
+  Serial.print("\tPV7: ");
+  Serial.print(photoVal7);
+  Serial.print("\tPV8: ");
+  Serial.println(photoVal8);
+}
+
 void getIRVal() {
   if (IR.decode(&cmd)) {
     preMillis = millis();
