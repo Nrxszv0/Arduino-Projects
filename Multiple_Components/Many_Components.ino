@@ -49,6 +49,9 @@ int xVal, yVal, sVal;
 
 int tPin1 = 47, tPin2 = 48;
 int tVal1, tVal2;
+
+int switchPin1 = 49;
+int switchVal1;
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
@@ -84,17 +87,20 @@ void setup() {
 
   pinMode(tPin1, INPUT);
   pinMode(tPin2, INPUT);
+
+  pinMode(switchPin1, INPUT);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  getDHTVals();
-  getTempVals();
-  getDistance();
-  getPhotoVals();
-  getJoystickVals();
-  getTiltVals();
-  getIRVal();
+//  getDHTVals();
+//  getTempVals();
+//  getDistance();
+//  getPhotoVals();
+//  getJoystickVals();
+//  getTiltVals();
+getSwitchVals();
+//  getIRVal();
 }
 void moveServos(int sersVal) {
   ser1.write(sersVal);
@@ -192,7 +198,12 @@ void getTiltVals() {
   Serial.print("\tTV1: ");
   Serial.print(tVal1);
   Serial.print("\tTV2: ");
-  Serial.println(tVal2);
+  Serial.print(tVal2);
+}
+void getSwitchVals() {
+  switchVal1 = digitalRead(switchPin1);
+  Serial.print("\tSV1: ");
+  Serial.println(switchVal1);
 }
 void getIRVal() {
   if (IR.decode(&cmd)) {
