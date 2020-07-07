@@ -2,14 +2,17 @@
 #include <Servo.h>
 #include <DHT.h>
 #include <IRremote.h>
+
 #define TYPE DHT11
 int htPin = 2;
 float humidity, tempC, tempF;
 DHT HT(htPin, TYPE);
+
 int rs = 34, e = 35, d4 = 36, d5 = 37, d6 = 38, d7 = 39;
 int rs2 = 40, e2 = 41, d42 = 42 , d52 = 43, d62 = 44, d72 = 45;
 LiquidCrystal lcd1(rs, e, d4, d5, d6, d7);
 LiquidCrystal lcd2(rs2, e2, d42, d52, d62, d72);
+
 int ser1Pin = 22, ser2Pin = 23, ser3Pin = 24, ser4Pin = 25, ser5Pin = 26, ser6Pin = 27, ser7Pin = 28, ser8Pin = 29, ser9Pin = 30, ser10Pin = 31, ser11Pin = 32, ser12Pin = 33;
 int serVal = 10;
 Servo ser1;
@@ -24,9 +27,11 @@ Servo ser9;
 Servo ser10;
 Servo ser11;
 Servo ser12;
+
 int tempPin = A0;
 int baseTemp = 24, sensVal;
 float voltage, tempC2, tempF2;
+
 int irPin = 13;
 String command = "";
 IRrecv IR(irPin);
@@ -35,8 +40,15 @@ unsigned long val, preMillis;
 int trigPin = 12, echoPin = 10;
 float pingTime, distanceIn;
 int ssDly = 2, sDly = 20, microsecondsToInchVal = 148; //For speed of sound
+
 int photoPin1 = A1, photoPin2 = A2, photoPin3 = A3, photoPin4 = A4, photoPin5 = A5, photoPin6 = A6, photoPin7 = A7, photoPin8 = A8;
 int photoVal1, photoVal2, photoVal3, photoVal4, photoVal5, photoVal6, photoVal7, photoVal8;
+
+int xPin = A9, yPin = A10, sPin = 46;
+int xVal, yVal, sVal;
+
+int tPin1 = 47, tPin2 = 48;
+int tVal1, tVal2;
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
@@ -66,6 +78,12 @@ void setup() {
 
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
+
+  pinMode(sPin, INPUT);
+  digitalWrite(sPin, HIGH);
+
+  pinMode(tPin1, INPUT);
+  pinMode(tPin2, INPUT);
 }
 
 void loop() {
@@ -74,6 +92,8 @@ void loop() {
   getTempVals();
   getDistance();
   getPhotoVals();
+  getJoystickVals();
+  getTiltVals();
   getIRVal();
 }
 void moveServos(int sersVal) {
@@ -152,9 +172,28 @@ void getPhotoVals() {
   Serial.print("\tPV7: ");
   Serial.print(photoVal7);
   Serial.print("\tPV8: ");
-  Serial.println(photoVal8);
+  Serial.print(photoVal8);
 }
+void getJoystickVals() {
+  xVal = analogRead(xPin);
+  yVal = analogRead(yPin);
+  sVal = digitalRead(sPin);
+  Serial.print("\tXV: ");
+  Serial.print(xVal);
+  Serial.print("\tYV: ");
+  Serial.print(yVal);
+  Serial.print("\tSV: ");
+  Serial.print(sVal);
 
+}
+void getTiltVals() {
+  tVal1 = digitalRead(tPin1);
+  tVal2 = digitalRead(tPin2);
+  Serial.print("\tTV1: ");
+  Serial.print(tVal1);
+  Serial.print("\tTV2: ");
+  Serial.println(tVal2);
+}
 void getIRVal() {
   if (IR.decode(&cmd)) {
     preMillis = millis();
