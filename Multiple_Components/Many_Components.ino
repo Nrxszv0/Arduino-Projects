@@ -10,11 +10,12 @@ DHT HT(htPin, TYPE);
 
 int rs = 34, e = 35, d4 = 36, d5 = 37, d6 = 38, d7 = 39;
 int rs2 = 40, e2 = 41, d42 = 42 , d52 = 43, d62 = 44, d72 = 45;
+int dly = 500;
 LiquidCrystal lcd1(rs, e, d4, d5, d6, d7);
 LiquidCrystal lcd2(rs2, e2, d42, d52, d62, d72);
 
 int ser1Pin = 22, ser2Pin = 23, ser3Pin = 24, ser4Pin = 25, ser5Pin = 26, ser6Pin = 27, ser7Pin = 28, ser8Pin = 29, ser9Pin = 30, ser10Pin = 31, ser11Pin = 32, ser12Pin = 33;
-int serVal = 10, serIncrement = 25, sersVal = 0, maxSersVal = 160, minSersVal=0;
+int serVal = 10, serIncrement = 25, sersVal = 0, maxSersVal = 160, minSersVal = 0;
 Servo ser1;
 Servo ser2;
 Servo ser3;
@@ -93,6 +94,7 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
+  clearLCDs();
   getDHTVals();
   getTempVals();
   getDistance();
@@ -102,6 +104,9 @@ void loop() {
   //getSwitchVals();
   moveServos();
   getIRVal();
+  printLCDs();
+  delay(dly);
+
 }
 void moveServos() {
   ser1.write(sersVal);
@@ -122,7 +127,7 @@ void getDHTVals() {
   humidity = HT.readHumidity();
   tempC = HT.readTemperature();
   tempF = HT.readTemperature(true);
-  Serial.print("H:");
+  Serial.print("H: ");
   Serial.print(humidity);
   Serial.print("\tTC: ");
   Serial.print(tempC);
@@ -218,12 +223,12 @@ void getIRVal() {
       case 0xFFA25D:
       case 0xE318261B: command = "pwr"; break;
       case 0xFF629D:
-      case 0x511DBB: 
-      command = "vol+";
-      if(sersVal < maxSersVal) {
-        sersVal += serIncrement;
-      }
-      break;
+      case 0x511DBB:
+        command = "vol+";
+        if (sersVal < maxSersVal) {
+          sersVal += serIncrement;
+        }
+        break;
       case 0xFFE21D:
       case 0xEE886D7F: command = "stop"; break;
       case 0xFF22DD:
@@ -236,11 +241,11 @@ void getIRVal() {
       case 0xF076C13B: command = "down"; break;
       case 0xFFA857:
       case 0xA3C8EDDB:
-      command = "vol-";
-      if(sersVal > minSersVal) {
-        sersVal -= serIncrement;
-      }
-      break;
+        command = "vol-";
+        if (sersVal > minSersVal) {
+          sersVal -= serIncrement;
+        }
+        break;
       case 0xFF906F:
       case 0xE5CFBD7F: command = "up"; break;
       case 0xFF6897:
@@ -272,4 +277,32 @@ void getIRVal() {
     Serial.print("==");
     Serial.println(command);
   }
+}
+void printLCDs() {
+  lcd1.setCursor(0, 0);
+  lcd2.setCursor(0, 0);
+
+  lcd1.print("H:");
+  lcd1.print(humidity);
+  lcd1.print(" TC:");
+  lcd1.print(tempC);
+  lcd1.setCursor(0, 1);
+  lcd1.print("TF:");
+  lcd1.print(tempF);
+  lcd1.print(" SV:");
+  lcd1.print(sersVal);
+
+  lcd2.print("DIn:");
+  lcd2.print(distanceIn);
+  lcd2.print(" TVS:");
+  lcd2.print(tVal1);
+  lcd2.setCursor(0, 1);
+  lcd2.print("CMD: ");
+  lcd2.print(command);
+  lcd2.print(" XV: ");
+  lcd2.print(xVal);
+}
+void clearLCDs() {
+  lcd1.clear();
+  lcd2.clear();
 }
