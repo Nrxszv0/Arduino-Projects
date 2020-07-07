@@ -14,7 +14,7 @@ LiquidCrystal lcd1(rs, e, d4, d5, d6, d7);
 LiquidCrystal lcd2(rs2, e2, d42, d52, d62, d72);
 
 int ser1Pin = 22, ser2Pin = 23, ser3Pin = 24, ser4Pin = 25, ser5Pin = 26, ser6Pin = 27, ser7Pin = 28, ser8Pin = 29, ser9Pin = 30, ser10Pin = 31, ser11Pin = 32, ser12Pin = 33;
-int serVal = 10;
+int serVal = 10, serIncrement = 25, sersVal = 0, maxSersVal = 160, minSersVal=0;
 Servo ser1;
 Servo ser2;
 Servo ser3;
@@ -50,8 +50,8 @@ int xVal, yVal, sVal;
 int tPin1 = 47, tPin2 = 48;
 int tVal1, tVal2;
 
-int switchPin1 = 49;
-int switchVal1;
+//int switchPin1 = 49;
+//int switchVal1;
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
@@ -88,21 +88,22 @@ void setup() {
   pinMode(tPin1, INPUT);
   pinMode(tPin2, INPUT);
 
-  pinMode(switchPin1, INPUT);
+  //  pinMode(switchPin1, INPUT);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-//  getDHTVals();
-//  getTempVals();
-//  getDistance();
-//  getPhotoVals();
-//  getJoystickVals();
-//  getTiltVals();
-getSwitchVals();
-//  getIRVal();
+  getDHTVals();
+  getTempVals();
+  getDistance();
+  getPhotoVals();
+  getJoystickVals();
+  getTiltVals();
+  //getSwitchVals();
+  moveServos();
+  getIRVal();
 }
-void moveServos(int sersVal) {
+void moveServos() {
   ser1.write(sersVal);
   ser2.write(sersVal);
   ser3.write(sersVal);
@@ -115,6 +116,7 @@ void moveServos(int sersVal) {
   ser10.write(sersVal);
   ser11.write(sersVal);
   ser12.write(sersVal);
+  Serial.print(sersVal);
 }
 void getDHTVals() {
   humidity = HT.readHumidity();
@@ -198,13 +200,13 @@ void getTiltVals() {
   Serial.print("\tTV1: ");
   Serial.print(tVal1);
   Serial.print("\tTV2: ");
-  Serial.print(tVal2);
+  Serial.println(tVal2);
 }
-void getSwitchVals() {
-  switchVal1 = digitalRead(switchPin1);
-  Serial.print("\tSV1: ");
-  Serial.println(switchVal1);
-}
+//void getSwitchVals() {
+//  switchVal1 = digitalRead(switchPin1);
+//  Serial.print("\tSV1: ");
+//  Serial.println(switchVal1);
+//}
 void getIRVal() {
   if (IR.decode(&cmd)) {
     preMillis = millis();
@@ -216,7 +218,12 @@ void getIRVal() {
       case 0xFFA25D:
       case 0xE318261B: command = "pwr"; break;
       case 0xFF629D:
-      case 0x511DBB: command = "vol+"; break;
+      case 0x511DBB: 
+      command = "vol+";
+      if(sersVal < maxSersVal) {
+        sersVal += serIncrement;
+      }
+      break;
       case 0xFFE21D:
       case 0xEE886D7F: command = "stop"; break;
       case 0xFF22DD:
@@ -228,7 +235,12 @@ void getIRVal() {
       case 0xFFE01F:
       case 0xF076C13B: command = "down"; break;
       case 0xFFA857:
-      case 0xA3C8EDDB: command = "vol-"; break;
+      case 0xA3C8EDDB:
+      command = "vol-";
+      if(sersVal > minSersVal) {
+        sersVal -= serIncrement;
+      }
+      break;
       case 0xFF906F:
       case 0xE5CFBD7F: command = "up"; break;
       case 0xFF6897:
